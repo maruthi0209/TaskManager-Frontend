@@ -5,48 +5,7 @@
 * **API Interaction:** Makes HTTP requests to the associated backend API to perform CRUD operations on tasks and handle user authentication.
 
 
-1. AWS Architecture Diagram (Text-based Representation)
-+-------------------+      +---------------------------------+
-|     End User      |      |          Firebase/Google        |
-| (Web Browser)     |<---->|         Authentication          |
-+-------------------+      +---------------------------------+
-          |                               ^
-          | HTTP/HTTPS                     | JWT Token (Backend verifies)
-          v                                |
-+-------------------+      +---------------+------------------+
-|   Amazon Route 53 |      |     AWS Lambda / API Gateway     |
-|    (DNS Service)  |      |   (for specific auth callbacks)  |
-+-------------------+      +----------------------------------+
-          |                                  ^
-          |                                  |
-          v                                  |
-+-------------------+   HTTP/HTTPS      +-------------------+
-|  Amazon CloudFront|<---------------   | Application Load  |
-|    (CDN)          |                   |     Balancer      |
-+-------------------+                   |       (ALB)       |
-     ^     ^                            +---------+---------+
-     |     | HTTPS (Frontend Assets)              |
-     |     +--------------------------------------+
-     |                                            |
-     |                                            v
-     |                             +-----------------------------------+
-     |                             |   Auto Scaling Group (ASG)        |
-     |                             |   (for Node.js/Express Backend)   |
-     |                             |                                   |
-     |                             | +-------------------------------+ |
-     |                             | |  Amazon EC2 Instance(s)       | |
-     |                             | | (or ECS/Fargate for containers)| |
-     |                             | +-------------------------------+ |
-     |                             +-----------------------------------+
-     |                                            | HTTPS/TLS (Database Connectivity)
-     |                                            v
-     |                                    +-----------------------+
-     |                                    |   MongoDB Atlas /     |
-     |                                    |   Amazon DocumentDB   |
-     +----------------------------------->|   (Managed Database)  |
-                                          +-----------------------+
-
-2. On Ideal Instance, Server, and CI/CD Pipeline - here are the ideal choices:
+On Ideal Instance, Server, and CI/CD Pipeline - here are the ideal choices:
 
 A. Frontend (React Application)
 Server/Hosting:
